@@ -69,9 +69,9 @@ def verMatriz(matriz):
             print(matriz[i][j], "\t", end=" ")
         print()
 def menu(case,Client_conn):
-        print("\tElige una dificultad\t")
+        """print("\tElige una dificultad\t")
         print("1. Principiante")
-        print("2. Avanzado")
+        print("2. Avanzado")"""
         if case == 1:
             matrizp=matrizP()
             verMatriz(matrizp)
@@ -139,6 +139,8 @@ def ganarV(matriz,sim):
                     return 1
                     break;
 def jugar(matriz,Client_conn):
+    hilo = threading.current_thread()
+    #print("ID Hilo: ", hilo.ident)
     simJ="x"
     simS="o"
     cont=0
@@ -147,29 +149,37 @@ def jugar(matriz,Client_conn):
     long=(len(matriz)-1)*(len(matriz)-1)
     inicio=time()
     while cont<long:
+        print("***ID Hilo: ", hilo.ident,"***")
         print("TURNO JUGADOR\n")
         colocar(matriz,simJ,Client_conn)
         verMatriz(matriz)
         if ganarH(matriz,simJ) is 1:
+            print("***ID Hilo: ", hilo.ident,"***")
             print("Gano JUGADOR")
             break;
         if ganarV(matriz, simJ) is 1:
+            print("***ID Hilo: ", hilo.ident,"***")
             print("Gano JUGADOR")
             break;
         cont+=1;
         if cont>=long:
+            print("***ID Hilo: ", hilo.ident,"***")
             print("Juego Terminado: EMPATE")
             break
+        print("***ID Hilo: ", hilo.ident,"***")
         print("TURNO MAQUINA\n")
         juegoAuto(matriz,simS, Client_conn)
         if ganarH(matriz,simS) is 1:
+            print("***ID Hilo: ", hilo.ident,"***")
             print("Gano MAQUINA")
             break;
         if ganarV(matriz, simS) is 1:
+            print("***ID Hilo: ", hilo.ident,"***")
             print("Gano MAQUINA")
             break;
         cont+=1
         if cont>=long:
+            print("***ID Hilo: ", hilo.ident,"***")
             print("Juego Terminado: EMPATE")
             break
     final=time()
@@ -198,7 +208,7 @@ def servirPorSiempre(TCPServerSocket, listaconexiones):
     except Exception as e:
         print(e)
 
-HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
+HOST = "192.168.1.64"  # Standard loopback interface address (localhost)
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 buffer_size = 1024
 listaConexiones = []
