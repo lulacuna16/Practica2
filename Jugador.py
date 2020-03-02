@@ -1,5 +1,7 @@
 from time import time
 import socket
+import sys
+
 def matrizP(): #Tablero Principiante
     filas=["1","2","3"];
     columnas=["A","B","C"];
